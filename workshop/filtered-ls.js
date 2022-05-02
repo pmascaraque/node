@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const dirname = process.argv[2];
-const ext = '.' + process.argv[3];
+const ext = process.argv[3];
 
 fs.readdir(dirname, (err, list) => { //read directory
   if (err) {
@@ -9,9 +9,7 @@ fs.readdir(dirname, (err, list) => { //read directory
     return;
   }
 
-  list.forEach(file => {
-    if (file.endsWith(ext)) {
-      console.log(file);
-    }
+  list.forEach(file => { //list each file in directory
+      file.split('.')[1] === ext ? console.log(file) : null;
   });
 });
