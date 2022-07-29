@@ -13,7 +13,7 @@ const getOneWorkout = async (req, res) => {
 const createNewWorkout = async (req, res) => {
   const { body } = req;
 
-  if (!body || !body.name || !body.mode || !body.equipment || !body.exercises || body.trainerTips) { return res.status(400).send({ status : 400, message : "Bad request" }); }
+  if (!body.name || !body.mode || !body.equipment || !body.exercises || body.trainerTips) { return res.status(400).send({ status : 400, message : "Bad request" }); }
   
   const newWorkout = {
     name : body.name,
@@ -23,7 +23,9 @@ const createNewWorkout = async (req, res) => {
     trainerTips : body.trainerTips
   };
   
-  const createdWorkout = workoutService.createOneWorkout(newWorkout);
+  console.log("newWorkout", newWorkout);
+
+  const createdWorkout = workoutService.createNewWorkout(newWorkout);
   res.status(201).send({ status : 201, data : createdWorkout });
 }
 
