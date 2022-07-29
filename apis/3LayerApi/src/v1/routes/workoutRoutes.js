@@ -7,7 +7,7 @@ router
 
   .get('/:workoutId', workoutController.getOneWorkout)
 
-  .post('/:workoutId', workoutController.createOneWorkout)
+  .post('/:workoutId', workoutController.createNewWorkout)
 
   .patch('/:workoutId', workoutController.updateOneWorkout)
 

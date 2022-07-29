@@ -10,9 +10,21 @@ const getOneWorkout = async (req, res) => {
   res.send(`Get workout ${req.params.workoutId}`);
 }
 
-const createOneWorkout = async (req, res) => {
-  const createdWorkout = workoutService.createOneWorkout(req.body);
-  res.send(`Create workout ${req.params.workoutId}`);
+const createNewWorkout = async (req, res) => {
+  const { body } = req;
+
+  if (!body || !body.name || !body.mode || !body.equipment || !body.exercises || body.trainerTips) { return res.status(400).send({ status : 400, message : "Bad request" }); }
+  
+  const newWorkout = {
+    name : body.name,
+    mode : body.mode,
+    equipment : body.equipment,
+    exercises : body.exercises,
+    trainerTips : body.trainerTips
+  };
+  
+  const createdWorkout = workoutService.createOneWorkout(newWorkout);
+  res.status(201).send({ status : 201, data : createdWorkout });
 }
 
 const updateOneWorkout = async (req, res) => {
@@ -28,7 +40,7 @@ const deleteOneWorkout = async (req, res) => {
 module.exports = {
   getAllWorkouts,
   getOneWorkout,
-  createOneWorkout,
+  createNewWorkout,
   updateOneWorkout,
   deleteOneWorkout
 }
