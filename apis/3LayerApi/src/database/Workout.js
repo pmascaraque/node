@@ -1,5 +1,3 @@
-//dummy ORM
-
 const DB = require('./dummyDB.json');
 const { saveToDatabase } = require('./utils');
 
