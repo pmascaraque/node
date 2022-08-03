@@ -1,17 +1,26 @@
 import express from 'express';
 
 const app = express();
+interface Params { // interface for object
+  a: number;
+  b?: number;
+}
 
-const add = (a: number, b?: number): number => {
-  if (b) {
-    return a + b;
+type Params2 = { // type for anything else
+}
+
+type Add = (x: Params) => number; // type for add function
+
+const add: Add = x => {
+  if (x.b) {
+    return x.a + x.b;
   } else {
-    return a;
+    return x.a;
   }
 }
 
 app.get('/', (req) => {
-  add(1);
+  add({ a: 1, b: 2 });
 });
 
 app.listen(3001, () => {
